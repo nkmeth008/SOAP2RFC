@@ -1,0 +1,29 @@
+FUNCTION zfu_fm.
+*"----------------------------------------------------------------------
+*"*"Local Interface:
+*"  IMPORTING
+*"     VALUE(TCKN) TYPE  ZDE_TCKN
+*"     VALUE(ISIM) TYPE  ZDE_ISIM
+*"     VALUE(SOYISIM) TYPE  ZDE_SOYAD
+*"  EXPORTING
+*"     VALUE(EV_RESULT) TYPE  CHAR30
+*"----------------------------------------------------------------------
+
+
+
+  DATA: t_data TYPE TABLE OF zfu_tablo,
+        w_data TYPE zfu_tablo.
+
+  w_data-tckn = tckn.
+  w_data-isim = isim.
+  w_data-soyisim = soyisim.
+
+  IF tckn IS NOT INITIAL AND isim IS NOT INITIAL AND soyisim IS NOT INITIAL.
+    ev_result = 'İşlem Başarılı!'.
+    INSERT zfu_tablo FROM w_data.
+
+  ELSEIF tckn IS INITIAL OR isim IS INITIAL OR soyisim IS INITIAL.
+    ev_result = 'Hatalı İşlem!'.
+  ENDIF.
+
+ENDFUNCTION.
